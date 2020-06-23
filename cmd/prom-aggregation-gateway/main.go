@@ -280,8 +280,12 @@ func (a *aggate) handler(w http.ResponseWriter, r *http.Request) {
 		// Cleaning up metrics that have not been merged for a while
 		a.families[name].Metric = cleanupFamily(a.families[name].GetMetric(), a.timeToLiveMs)
 
+		// Including only families that still have metrics to be scraped
 		if len(a.families[name].Metric) > 0 {
 			metricNames = append(metricNames, name)
+		} else {
+			// Remove the empty families
+			delete(a.families, name)
 		}
 	}
 	sort.Sort(sort.StringSlice(metricNames))
