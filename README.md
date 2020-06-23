@@ -7,6 +7,13 @@ Prometheus Aggregation Gateway is a aggregating push gateway for Prometheus.  As
 * Gauges are also added up (but this may not make any sense)
 * Summaries are discarded.
 
+## EQ Development Setup
+
+1. Install Docker (https://www.docker.com/)
+1. `./script/setup.sh` will update/download packages and generate Docker container
+1. `./script/test.sh (test_folder)` will run tests
+1. `./script/run.sh` will run the app
+
 ## How to use
 
 Send metrics in [Prometheus format](https://prometheus.io/docs/instrumenting/exposition_formats/) to `/metrics/`

@@ -1,0 +1,11 @@
+steps:
+- name: 'docker/compose:1.24.0'
+  id: 'Run tests'
+  args: ['-f', './docker-compose.yml', 'run', 'web', 'go', 'test', '-cover', '-race', './cmd/prom-aggregation-gateway/...']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build image'
+  waitFor: ['-']
+  args: ['build', '-t', 'us.gcr.io/everquote-container-registry/prom-aggregation-gateway:$SHORT_SHA', '.']
+images: ['us.gcr.io/everquote-container-registry/prom-aggregation-gateway:$SHORT_SHA']
+options:
+ machineType: 'N1_HIGHCPU_8'
