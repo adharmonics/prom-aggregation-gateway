@@ -1,7 +1,7 @@
 steps:
 - name: 'docker/compose:1.24.0'
   id: 'Run tests'
-  args: ['-f', './docker-compose.yml', 'run', 'web', 'go', 'test', '-cover', '-race', './...']
+  args: ['-f', './docker-compose.yml', 'run', 'web', 'go', 'test', '-cover', '-race', './cmd/prom-aggregation-gateway/...']
 - name: 'gcr.io/cloud-builders/docker'
   id: 'Build image'
   waitFor: ['-']
