@@ -273,8 +273,8 @@ func (a *aggate) handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", string(contentType))
 	enc := expfmt.NewEncoder(w, contentType)
 
-	a.familiesLock.RLock()
-	defer a.familiesLock.RUnlock()
+	a.familiesLock.Lock()
+	defer a.familiesLock.Unlock()
 	metricNames := []string{}
 	for name := range a.families {
 		// Cleaning up metrics that have not been merged for a while
